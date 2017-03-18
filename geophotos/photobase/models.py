@@ -26,7 +26,6 @@ class Coords(models.Model):
     by = models.ManyToManyField(User)
 
     # coordinates
-    address = models.ForeignKey(Location)
     x = models.DecimalField(decimal_places=16, max_digits=21)
     y = models.DecimalField(decimal_places=16, max_digits=21)
     floor = models.IntegerField()
