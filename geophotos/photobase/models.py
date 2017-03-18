@@ -4,8 +4,6 @@ from geophotos import settings
 
 # Create your models here.
 
-
-
 class Location(models.Model):
     # TimeStamp
     time_created = models.DateTimeField(auto_now_add=True)
@@ -13,6 +11,7 @@ class Location(models.Model):
     by = models.ManyToManyField(User)
 
     # address
+    name = models.CharField(max_length=255, unique=True)
     house_number = models.IntegerField()
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -52,6 +51,8 @@ class SiteDoc(models.Model):
     last_edited = models.DateTimeField(auto_now=True)
     by = models.ManyToManyField(User)
 
+    # data
+    name = models.CharField(max_length=255, unique=True)
     location = models.ForeignKey(Location)
     site_plan = models.ManyToManyField(SitePlan)
 
@@ -62,6 +63,7 @@ class Image(models.Model):
     by = models.ManyToManyField(User, related_name='images')
     
     # data
+    title = models.CharField(max_length=255, unique=True)
     image = models.ImageField(upload_to=settings.MEDIA_ROOT + 'dcim/')
     geo = models.ForeignKey(Coords)
     note = models.TextField()
