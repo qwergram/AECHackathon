@@ -19,5 +19,5 @@ from photobase import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.LocationView.as_view()),
+    url(r'^$', views.CoordsView.as_view()),
 ]
