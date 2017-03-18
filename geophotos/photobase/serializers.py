@@ -28,8 +28,8 @@ class SiteDocSerializer(serializers.Serializer):
 class ImageSerializer(serializers.Serializer):
     title = serializers.CharField()
     image = serializers.ImageField()
-    corrected_x = serializer.DecimalField(max_digits=25, decimal_places=17)
-    corrected_y = serializer.DecimalField(max_digits=25, decimal_places=17)
-    note = serializer.CharField()
-    flag = serializer.IntegerField()
-    tags = serializer.CharField()
+    corrected_x = serializers.DecimalField(max_digits=25, decimal_places=17)
+    corrected_y = serializers.DecimalField(max_digits=25, decimal_places=17)
+    note = serializers.CharField()
+    flag = serializers.IntegerField()
+    tags = serializers.CharField()
