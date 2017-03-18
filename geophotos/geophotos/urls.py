@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^locations/$', views.LocationView.as_view()),
     url(r'^siteplans/$', views.SitePlanView.as_view()),
     url(r'^sitedocs/$', views.SiteDocView.as_view()),
+    url(r'^images/$', views.ImageView.as_view()),
 ]

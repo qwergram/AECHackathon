@@ -97,7 +97,7 @@ class SiteDocView(APIView):
 class ImageView(APIView):
     
     def get_queryset(self):
-        return Images.objects.all()
+        return Image.objects.all()
 
     def get(self, request, format=None):
         sitedocs = self.get_queryset()
