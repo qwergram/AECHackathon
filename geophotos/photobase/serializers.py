@@ -20,10 +20,7 @@ class SitePlanSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
 
 
-class SiteDocSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SiteDoc
-
+class SiteDocSerializer(serializers.Serializer):
     location = serializers.CharField()
     site_plan = serializers.CharField()
 
