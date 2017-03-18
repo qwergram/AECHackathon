@@ -10,7 +10,7 @@ class LocationSerializer(serializers.ModelSerializer):
 class CoordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coords
-        fields = ('address', 'x', 'y', 'floor')
+        fields = ('x', 'y', 'floor')
 
 class SitePlanSerializer(serializers.ModelSerializer):
     class Meta:
