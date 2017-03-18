@@ -74,3 +74,39 @@ class SitePlanView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SiteDocView(APIView):
+    
+    def get_queryset(self):
+        return SiteDoc.objects.all()
+
+    def get(self, request, format=None):
+        sitedocs = self.get_queryset()
+        serializer = SiteDocSerializer(sitedocs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SiteDocSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ImageView(APIView):
+    
+    def get_queryset(self):
+        return Images.objects.all()
+
+    def get(self, request, format=None):
+        sitedocs = self.get_queryset()
+        serializer = ImageSerializer(sitedocs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = ImageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)

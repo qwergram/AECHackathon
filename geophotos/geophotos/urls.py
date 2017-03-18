@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^coords/$', views.CoordsView.as_view()),
     url(r'^locations/$', views.LocationView.as_view()),
     url(r'^siteplans/$', views.SitePlanView.as_view()),
-    
+    url(r'^sitedocs/$', views.SiteDocView.as_view()),
 ]
