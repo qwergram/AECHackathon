@@ -96,3 +96,4 @@ ENV/
 #
 *.sqlite3
 media/
+secrets.py
