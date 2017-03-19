@@ -2,6 +2,8 @@ from rest_framework import serializers
 from photobase.models import SiteDoc, Image
 from django.contrib.auth.models import User
 
+from photobase.models import Test
+
 class SiteDocSerializer(serializers.Serializer):
     house_number = serializers.IntegerField()
     street = serializers.CharField()
@@ -41,3 +43,7 @@ class ImageSerializer(serializers.Serializer):
     image = serializers.ImageField()
     note = serializers.CharField(allow_blank=True)
     flag = serializers.IntegerField()
+
+
+class TestSerializer(serializers.Serializer):
+    test = serializers.CharField()

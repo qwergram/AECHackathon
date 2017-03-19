@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/sitedocs/$', views.SiteDocView.as_view()),
     url(r'^v1/images/$', views.ImageView.as_view()),
+    url(r'^$', views.TestView.as_view())
 ]

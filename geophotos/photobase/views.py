@@ -12,6 +12,9 @@ from photobase.serializers import (
     ImageSerializer
 )
 
+from photobase.models import Test
+from photobase.serializers import TestSerializer
+
 # Create your views here.
 
 class SiteDocView(APIView):
@@ -44,6 +47,24 @@ class ImageView(APIView):
 
     def post(self, request, format=None):
         serializer = ImageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TestView(APIView):
+
+    def get_queryset(self):
+        return Test.objects.all()
+
+    def get(self, request, format=None):
+        sitedocs = self.get_queryset()
+        serializer = TestSerializer(sitedocs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = TestSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

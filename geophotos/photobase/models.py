@@ -62,3 +62,8 @@ class SiteDoc(models.Model):
     photos = models.ManyToManyField(Image, blank=True)
 
     def __str__(self): return self.name
+
+class Test(models.Model):
+    message = models.CharField()
+
+    def __str__(self): return self.message
