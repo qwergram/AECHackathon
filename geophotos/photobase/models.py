@@ -10,6 +10,7 @@ class Image(models.Model):
     last_edited = models.DateTimeField(auto_now=True)
     by = models.ManyToManyField(User, related_name='images')
     
+    # title
     title = models.CharField(max_length=255, unique=True)
 
     # geo location
@@ -17,12 +18,12 @@ class Image(models.Model):
     geo_y = models.DecimalField(decimal_places=16, max_digits=21)
 
     # user tagging
-    tags = models.ManyToManyField(User)
+    tags = models.ManyToManyField(User, blank=True, null=True)
 
     # image data
     image = models.ImageField(upload_to='dcim/')
-    note = models.TextField()
-    flag = models.IntegerField()
+    note = models.TextField(blank=True, null=True)
+    flag = models.IntegerField(default=0)
 
 
 class SiteDoc(models.Model):
@@ -40,9 +41,8 @@ class SiteDoc(models.Model):
 
     # site plan data
     name = models.CharField(max_length=255, unique=True)
-    location = models.ForeignKey(Location)
     site_plan = models.ImageField(upload_to='sites/')
-    floor = models.IntegerField()
+    floor = models.IntegerField(blank=True, null=True)
 
     # geo data
     upperleft_geo_x = models.DecimalField(decimal_places=16, max_digits=21)
@@ -57,7 +57,7 @@ class SiteDoc(models.Model):
     bottomright_pix_y = models.DecimalField(decimal_places=16, max_digits=21)
 
     # images
-    photos = models.ManyToManyField(Image)
+    photos = models.ManyToManyField(Image, blank=True, null=True)
 
 
 
