@@ -4,45 +4,26 @@ from geophotos import settings
 
 # Create your models here.
 
-class Location(models.Model):
+class Image(models.Model):
     # TimeStamp
     time_created = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now=True)
-    by = models.ManyToManyField(User)
-
-    # address
-    name = models.CharField(max_length=255, unique=True)
-    house_number = models.IntegerField()
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    state = models.CharField(max_length=2)
-    zip_code = models.IntegerField()
-
-
-class Coords(models.Model):
-    # TimeStamp
-    time_created = models.DateTimeField(auto_now_add=True)
-    last_edited = models.DateTimeField(auto_now=True)
-    by = models.ManyToManyField(User)
-
-    # coordinates
-    x = models.DecimalField(decimal_places=16, max_digits=21)
-    y = models.DecimalField(decimal_places=16, max_digits=21)
-    floor = models.IntegerField()
-
-
-class SitePlan(models.Model):
-    # TimeStamp
-    time_created = models.DateTimeField(auto_now_add=True)
-    last_edited = models.DateTimeField(auto_now=True)
-    by = models.ManyToManyField(User)
+    by = models.ManyToManyField(User, related_name='images')
     
-    # pdf data
-    # populate with an external link
-    external = models.CharField(max_length=255, unique=True)
-    # convert to image when needed
-    image = models.ImageField(upload_to=settings.MEDIA_ROOT + 'sites/')
-    
+    title = models.CharField(max_length=255, unique=True)
+
+    # geo location
+    geo_x = models.DecimalField(decimal_places=16, max_digits=21)
+    geo_y = models.DecimalField(decimal_places=16, max_digits=21)
+
+    # user tagging
+    tags = models.ManyToManyField(User)
+
+    # image data
+    image = models.ImageField(upload_to='dcim/')
+    note = models.TextField()
+    flag = models.IntegerField()
+
 
 class SiteDoc(models.Model):
     # TimeStamp
@@ -50,24 +31,36 @@ class SiteDoc(models.Model):
     last_edited = models.DateTimeField(auto_now=True)
     by = models.ManyToManyField(User)
 
-    # data
+    # Address
+    house_number = models.IntegerField()
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=2)
+    zip_code = models.IntegerField()
+
+    # site plan data
     name = models.CharField(max_length=255, unique=True)
     location = models.ForeignKey(Location)
-    site_plan = models.ManyToManyField(SitePlan)
+    site_plan = models.ImageField(upload_to='sites/')
+    floor = models.IntegerField()
 
-class Image(models.Model):
-    # TimeStamp
-    time_created = models.DateTimeField(auto_now_add=True)
-    last_edited = models.DateTimeField(auto_now=True)
-    by = models.ManyToManyField(User, related_name='images')
-    
-    # data
-    title = models.CharField(max_length=255, unique=True)
-    image = models.ImageField(upload_to=settings.MEDIA_ROOT + 'dcim/')
-    geo = models.ForeignKey(Coords)
-    note = models.TextField()
-    flag = models.IntegerField()
-    tags = models.ManyToManyField(User)
+    # geo data
+    upperleft_geo_x = models.DecimalField(decimal_places=16, max_digits=21)
+    upperleft_geo_y = models.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_geo_x = models.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_geo_y = models.DecimalField(decimal_places=16, max_digits=21)
+
+    # pixel data
+    upperleft_pix_x = models.DecimalField(decimal_places=16, max_digits=21)
+    upperleft_pix_y = models.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_pix_x = models.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_pix_y = models.DecimalField(decimal_places=16, max_digits=21)
+
+    # images
+    photos = models.ManyToManyField(Image)
+
+
+
 
 
 
