@@ -18,7 +18,7 @@ class Image(models.Model):
     geo_y = models.DecimalField(decimal_places=16, max_digits=21)
 
     # user tagging
-    tags = models.ManyToManyField(User, blank=True, null=True)
+    tags = models.ManyToManyField(User, blank=True)
 
     # image data
     image = models.ImageField(upload_to='dcim/')
@@ -59,6 +59,6 @@ class SiteDoc(models.Model):
     bottomright_pix_y = models.DecimalField(decimal_places=16, max_digits=21)
 
     # images
-    photos = models.ManyToManyField(Image, blank=True, null=True)
+    photos = models.ManyToManyField(Image, blank=True)
 
     def __str__(self): return self.name
