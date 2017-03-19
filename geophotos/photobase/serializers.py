@@ -23,3 +23,20 @@ class SiteDocSerializer(serializers.Serializer):
     upperleft_pix_y = serializers.DecimalField(decimal_places=16, max_digits=21)
     bottomright_pix_x = serializers.DecimalField(decimal_places=16, max_digits=21)
     bottomright_pix_y = serializers.DecimalField(decimal_places=16, max_digits=21)
+
+
+class ImageSerializer(serializers.Serializer):
+    # title
+    title = serializers.CharField()
+
+    # geo location
+    geo_x = serializers.DecimalField(decimal_places=16, max_digits=21)
+    geo_y = serializers.DecimalField(decimal_places=16, max_digits=21)
+
+    # user tagging
+    tags = serializers.ManyToManyField(User, allow_blank=True)
+
+    # image data
+    image = serializers.ImageField()
+    note = serializers.CharField(allow_blank=True)
+    flag = serializers.IntegerField()
