@@ -46,4 +46,14 @@ class ImageSerializer(serializers.Serializer):
 
 
 class TestSerializer(serializers.Serializer):
-    test = serializers.CharField()
+    message = serializers.CharField()
+
+    def create(self, data):
+        print(data)
+        from photobase import twilio
+        twilio.notifyOfTag("+14259545665", data['message'])
+
+        result = Test(message=data['message'])
+        result.save()
+
+        return result
