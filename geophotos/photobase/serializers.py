@@ -1,35 +1,25 @@
 from rest_framework import serializers
-from photobase.models import Location, Coords, SitePlan, SiteDoc, Image
-
-class LocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Location
-        fields = ('house_number', 'street', 'city', 'state', 'zip_code')
-
-
-class CoordsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Coords
-        fields = ('x', 'y', 'floor')
-
-class SitePlanSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SitePlan
-        fields = ('external', )
-
-    image = serializers.ImageField(required=False)
-
+from photobase.models import SiteDoc, Image
 
 class SiteDocSerializer(serializers.Serializer):
-    location = serializers.CharField()
-    site_plan = serializers.CharField()
+    house_number = serializers.IntegerField()
+    street = serializers.CharField()
+    city = serializers.CharField()
+    state = serializers.CharField()
+    zip_code = serializers.IntegerField()
 
+    name = serializers.CharField()
+    site_plan = serializers.ImageField()
+    floor = serializers.IntegerField(allow_blank=True)
 
-class ImageSerializer(serializers.Serializer):
-    title = serializers.CharField()
-    image = serializers.ImageField()
-    corrected_x = serializers.DecimalField(max_digits=25, decimal_places=17)
-    corrected_y = serializers.DecimalField(max_digits=25, decimal_places=17)
-    note = serializers.CharField()
-    flag = serializers.IntegerField()
-    tags = serializers.CharField()
+     # geo data
+    upperleft_geo_x = serializers.DecimalField(decimal_places=16, max_digits=21)
+    upperleft_geo_y = serializers.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_geo_x = serializers.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_geo_y = serializers.DecimalField(decimal_places=16, max_digits=21)
+
+    # pixel data
+    upperleft_pix_x = serializers.DecimalField(decimal_places=16, max_digits=21)
+    upperleft_pix_y = serializers.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_pix_x = serializers.DecimalField(decimal_places=16, max_digits=21)
+    bottomright_pix_y = serializers.DecimalField(decimal_places=16, max_digits=21)
