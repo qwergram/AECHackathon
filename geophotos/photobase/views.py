@@ -21,7 +21,6 @@ POST = 'POST'
 
 # Create your views here.
 
-
 class LocationView(APIView):
 
     def get_queryset(self):
