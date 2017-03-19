@@ -95,4 +95,4 @@ ENV/
 
 #
 *.sqlite3
-/media/
+media/
