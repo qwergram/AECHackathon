@@ -64,6 +64,6 @@ class SiteDoc(models.Model):
     def __str__(self): return self.name
 
 class Test(models.Model):
-    message = models.CharField()
+    message = models.CharField(max_length=255)
 
     def __str__(self): return self.message
