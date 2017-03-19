@@ -16,10 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from photobase import views
+from geophotos import settings
+
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/sitedocs/$', views.SiteDocView.as_view()),
     url(r'^v1/images/$', views.ImageView.as_view()),
-    url(r'^$', views.TestView.as_view())
-]
+    url(r'^upload/plans/$', views.TestView2.as_view()),
+    url(r'^confirm/plans/$', views.TestView3.as_view())
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
+static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

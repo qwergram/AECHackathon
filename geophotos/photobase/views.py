@@ -2,6 +2,7 @@
 # from django.views.generic import TemplateView
 
 from django.http import Http404
+from django.views.generic import TemplateView, View
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -70,3 +71,11 @@ class TestView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+class TestView2(TemplateView):
+    template_name = "photobase/uploadPlans.html"
+    
+class TestView3(TemplateView):
+    template_name = "photobase/confirmPlanImages.html"
+
+# upload will require os.system("convert -density 300 -trim pnccre1.pdf -quality 100 test1.jpg")

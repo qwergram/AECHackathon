@@ -8,7 +8,7 @@ class Image(models.Model):
     # TimeStamp
     time_created = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now=True)
-    by = models.ManyToManyField(User, related_name='images')
+    # by = models.ManyToManyField(User, related_name='images')
     
     # title
     title = models.CharField(max_length=255, unique=True)
@@ -32,18 +32,12 @@ class SiteDoc(models.Model):
     # TimeStamp
     time_created = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now=True)
-    by = models.ManyToManyField(User)
-
-    # Address
-    house_number = models.IntegerField()
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    state = models.CharField(max_length=2)
-    zip_code = models.IntegerField()
+    # by = models.ManyToManyField(User)
 
     # site plan data
     name = models.CharField(max_length=255, unique=True)
-    site_plan = models.ImageField(upload_to='sites/')
+    site_plan = models.FileField(upload_to='sites/pdf/')
+    site_plan_image = models.ImageField(upload_to='sites/img/', null=True, blank=True)
     floor = models.IntegerField(blank=True, null=True)
 
     # geo data
@@ -53,15 +47,37 @@ class SiteDoc(models.Model):
     bottomright_geo_y = models.DecimalField(decimal_places=16, max_digits=21)
 
     # pixel data
-    upperleft_pix_x = models.DecimalField(decimal_places=16, max_digits=21)
-    upperleft_pix_y = models.DecimalField(decimal_places=16, max_digits=21)
-    bottomright_pix_x = models.DecimalField(decimal_places=16, max_digits=21)
-    bottomright_pix_y = models.DecimalField(decimal_places=16, max_digits=21)
+    upperleft_pix_x = models.DecimalField(decimal_places=16, max_digits=21, blank=True, null=True)
+    upperleft_pix_y = models.DecimalField(decimal_places=16, max_digits=21, blank=True, null=True)
+    bottomright_pix_x = models.DecimalField(decimal_places=16, max_digits=21, blank=True, null=True)
+    bottomright_pix_y = models.DecimalField(decimal_places=16, max_digits=21, blank=True, null=True)
 
     # images
     photos = models.ManyToManyField(Image, blank=True)
 
     def __str__(self): return self.name
+
+class Project(models.Model):
+    # TimeStamp
+    time_created = models.DateTimeField(auto_now_add=True)
+    last_edited = models.DateTimeField(auto_now=True)
+    # by = models.ManyToManyField(User)
+    
+    # meta
+    name = models.CharField(max_length=255, unique=True)
+    
+    # location
+    house_number = models.IntegerField()
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=2)
+    zip_code = models.IntegerField()
+
+    # plans
+    plans = models.ManyToManyField(SiteDoc, blank=True)
+
+    def __str__(self): return self.name
+    
 
 class Test(models.Model):
     message = models.CharField(max_length=255)

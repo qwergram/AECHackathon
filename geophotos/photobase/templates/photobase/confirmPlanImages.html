@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<header>
+  <title>Confirm Site Docs</title>
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" />
+</header>
+
+<body>
+  <div class="container">
+
+    <h1>Basic Upload Format - Click on Opposite Corners of Building</h1>
+    <hr class="soften" />
+
+    <h3>Pncre1.pdf</h3>
+    <div class="row">
+      <div class="col-md-6"><img id="image1" src="/media/sites/img/test1.jpg" width="100%"></div>
+      <div class="col-md-6">
+        <image id="image2" src="/media/sites/img/map1.jpg" width="100%">
+      </div>
+    </div>
+
+    <h3>Pncre2.pdf</h3>
+    <div class="row">
+      <div class="col-md-6"><img id="image3" src="/media/sites/img/test2.jpg" width="100%"></div>
+      <div class="col-md-6">
+        <image id="image4" src="/media/sites/img/map1.jpg" width="100%">
+      </div>
+    </div>
+
+    <h3>Pncre3.pdf</h3>
+    <div class="row">
+      <div class="col-md-6"><img id="image5" src="/media/sites/img/test3.jpg" width="100%"></div>
+      <div class="col-md-6">
+        <image id="image6" src="/media/sites/img/map1.jpg" width="100%">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      for (var x = 1; x < 7; x++) {
+        $("#image" + x).click(function (ev) {
+          mouseX = ev.pageX;
+          mouseY = ev.pageY
+          //alert(mouseX + ' ' + mouseY);
+          var color = '#FF0000';
+          var intSize = 10;
+          var size = intSize + 'px';
+          $("body").append(
+            $('<div></div>')
+              .css('position', 'absolute')
+              .css('top', (mouseY - (intSize / 2)) + 'px')
+              .css('left', (mouseX - (intSize / 2)) + 'px')
+              .css('width', size)
+              .css('height', size)
+              .css('background-color', color)
+          );
+        });
+      }
+    </script>
+
+    <h3>Look Good?</h3>
+    <a href="">
+      <button class="btn btn-lg btn-success">Looks Good.</button>
+    </a>
+    <a href="">
+      <button class="btn btn-lg btn-danger">Reset All</button>
+    </a>
+
+  </div>
+  <!-- /container -->
+<br>
+<br>
+<br>
+
+</body>
+
+</html>
