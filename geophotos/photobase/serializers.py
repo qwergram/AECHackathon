@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from photobase.models import SiteDoc, Image
+from django.contrib.auth.models import User
 
 class SiteDocSerializer(serializers.Serializer):
     house_number = serializers.IntegerField()
@@ -10,7 +11,7 @@ class SiteDocSerializer(serializers.Serializer):
 
     name = serializers.CharField()
     site_plan = serializers.ImageField()
-    floor = serializers.IntegerField(allow_blank=True)
+    floor = serializers.IntegerField(required=False)
 
      # geo data
     upperleft_geo_x = serializers.DecimalField(decimal_places=16, max_digits=21)
@@ -34,7 +35,7 @@ class ImageSerializer(serializers.Serializer):
     geo_y = serializers.DecimalField(decimal_places=16, max_digits=21)
 
     # user tagging
-    tags = serializers.ManyToManyField(User, allow_blank=True)
+    tags = serializers.MultipleChoiceField(choices=[str(_) for _ in User.objects.all()])
 
     # image data
     image = serializers.ImageField()
