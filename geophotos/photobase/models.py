@@ -26,6 +26,8 @@ class Image(models.Model):
     flag = models.IntegerField(default=0)
 
 
+    def __str__(self): return self.title
+
 class SiteDoc(models.Model):
     # TimeStamp
     time_created = models.DateTimeField(auto_now_add=True)
@@ -59,11 +61,4 @@ class SiteDoc(models.Model):
     # images
     photos = models.ManyToManyField(Image, blank=True, null=True)
 
-
-
-
-
-
-
-
-
+    def __str__(self): return self.name
